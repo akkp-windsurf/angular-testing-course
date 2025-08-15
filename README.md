@@ -54,6 +54,46 @@ To run the frontend part of our code, we will use the Angular CLI:
 
 The application is visible at port 4200: [http://localhost:4200](http://localhost:4200)
 
+# Testing Approaches
+
+This repository demonstrates both traditional Angular testing approaches and modern user-centric testing with Angular Testing Library.
+
+## Running Tests
+
+To run all tests:
+
+    npm test
+
+To run tests in headless mode:
+
+    CHROME_BIN=/usr/bin/google-chrome-stable npm test -- --watch=false --browsers=ChromeHeadlessNoSandbox
+
+## Testing Libraries Used
+
+### Angular Testing Library
+
+This repository includes `@testing-library/angular` for user-centric testing approaches. Angular Testing Library focuses on testing components the way users interact with them, rather than testing implementation details.
+
+**Key benefits:**
+- User-centric queries (`getByText()`, `getByRole()`, etc.)
+- Semantic element selection over CSS selectors
+- Better accessibility testing support
+- More maintainable tests that focus on behavior
+
+**Example migration:** The "should display the first course" test in `CoursesCardListComponent` has been migrated from traditional TestBed approach to Angular Testing Library, demonstrating:
+- `render()` function instead of `TestBed.configureTestingModule()`
+- `screen.getByText()` instead of `By.css()` selectors
+- Role-based image queries instead of direct DOM access
+
+### Traditional TestBed Approach
+
+Most tests in this repository still use Angular's traditional TestBed approach for comprehensive component testing, including:
+- `TestBed.configureTestingModule()` for module configuration
+- `ComponentFixture` for component instances
+- `DebugElement` and `By.css()` for DOM queries
+
+Both approaches are valuable and serve different testing needs in modern Angular applications.
+
 
 
 # Important 
