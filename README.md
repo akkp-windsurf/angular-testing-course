@@ -54,6 +54,59 @@ To run the frontend part of our code, we will use the Angular CLI:
 
 The application is visible at port 4200: [http://localhost:4200](http://localhost:4200)
 
+# Testing Approaches
+
+This repository demonstrates multiple Angular testing approaches:
+
+## Traditional Angular Testing (TestBed)
+The majority of tests use Angular's built-in testing utilities:
+- `TestBed` for component setup and configuration
+- `ComponentFixture` for component interaction
+- `DebugElement` for DOM querying with CSS selectors
+- `By.css()` for element selection
+
+## Angular Testing Library
+Selected tests have been migrated to use Angular Testing Library for user-centric testing:
+- `@testing-library/angular` for component rendering
+- `render()` function instead of TestBed setup
+- Semantic queries (`getByText`, `getByRole`) instead of CSS selectors
+- Focus on user interaction patterns rather than implementation details
+
+### Running Tests
+
+To run the complete test suite:
+
+    npm test
+
+To run tests in watch mode during development:
+
+    npm run test:watch
+
+### Testing Library Example
+
+The `CoursesCardListComponent` includes both testing approaches for comparison:
+
+```typescript
+// Traditional TestBed approach
+it('should display the course list', () => {
+  component.courses = setupCourses();
+  fixture.detectChanges();
+  const cards = el.queryAll(By.css(".course-card"));
+  expect(cards.length).toBe(12);
+});
+
+// Testing Library approach  
+it('should display the first course', async () => {
+  const courses = setupCourses();
+  await render(CoursesCardListComponent, {
+    imports: [CoursesModule],
+    componentProperties: { courses }
+  });
+  const titleElement = screen.getByText(courses[0].titles.description);
+  expect(titleElement).toBeTruthy();
+});
+```
+
 
 
 # Important 
