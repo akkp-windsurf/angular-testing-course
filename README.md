@@ -54,9 +54,32 @@ To run the frontend part of our code, we will use the Angular CLI:
 
 The application is visible at port 4200: [http://localhost:4200](http://localhost:4200)
 
+# Testing Approaches
 
+This repository demonstrates multiple Angular testing methodologies:
 
-# Important 
+## Traditional Angular Testing (TestBed)
+Most tests in this repository use Angular's built-in testing utilities:
+- **TestBed** for component setup and module configuration
+- **ComponentFixture** for component interaction and change detection
+- **DebugElement** with CSS selectors for DOM queries
+- **By.css()** for element selection
+
+## Angular Testing Library
+Some tests have been migrated to use Angular Testing Library for user-centric testing:
+- **render()** function for component setup with simplified configuration
+- **screen.getByText()**, **screen.getByRole()** for semantic element queries
+- Focus on testing user interactions rather than implementation details
+- Better accessibility testing through role-based queries
+
+### Running Tests
+To run the complete test suite (including both testing approaches):
+
+    npm test
+
+The test suite includes examples of both traditional TestBed tests and Angular Testing Library tests, allowing you to compare different testing methodologies side by side.
+
+# Important
 
 This repository has multiple branches, have a look at the beginning of each section to see the name of the branch.
 
